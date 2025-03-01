@@ -1,15 +1,7 @@
 import './global.css';
-import {
-  Image,
-  Platform,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {useColorScheme, colorScheme} from 'nativewind';
+import { Image, Platform, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useColorScheme, colorScheme } from 'nativewind';
 
 export default function App() {
   const [hasNotch, setHasNotch] = useState<boolean>(false);
@@ -18,25 +10,14 @@ export default function App() {
       setHasNotch(StatusBar.currentHeight! > 24);
     }
   }, []);
-  const {setColorScheme, toggleColorScheme} = useColorScheme();
+  const { toggleColorScheme } = useColorScheme();
   const mode = colorScheme.get() == 'light' ? 1 : 0;
-  const icon = mode ? 'moon.png' : 'day-mode.png';
-
   return (
-    <View
-      className={`${hasNotch ? 'pt-16 px-5 dark:bg-black flex-1' : 'pt-1'}`}>
+    <View className={`${hasNotch ? 'pt-16 px-5 dark:bg-black flex-1' : 'pt-1'}`}>
       <StatusBar barStyle={mode ? 'dark-content' : 'light-content'} />
-      <TouchableOpacity
-        className="flex-row justify-end items-center gap-3"
-        onPress={() => {
-          toggleColorScheme();
-        }}>
+      <TouchableOpacity className="flex-row justify-end items-center gap-3" onPress={toggleColorScheme}>
         <Image
-          source={
-            mode
-              ? require(`./src/Assets/moon.png`)
-              : require('./src/Assets/day-mode.png')
-          }
+          source={mode ? require(`./src/Assets/moon.png`) : require('./src/Assets/day-mode.png')}
           className="h-10 w-10"
         />
       </TouchableOpacity>
@@ -57,4 +38,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({});
